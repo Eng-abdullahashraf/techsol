@@ -191,9 +191,9 @@ Widget diagnostics() => BlocProvider(
                   MaterialPageRoute(builder: (context) => seconedscreen(s: 0)));
               //
 
-           //   Mycubit.get(context).getdatatcache();
-           //  final String? datase=cache.getdata('zeko');
-             //print(datase);
+              //   Mycubit.get(context).getdatatcache();
+              //  final String? datase=cache.getdata('zeko');
+              //print(datase);
             },
           );
         },
@@ -434,7 +434,7 @@ Widget clinics(data) => Padding(
                             //'${clinic['email']}',
                             '${data['time_to']}',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 18.0),
+                                TextStyle(color: Colors.black, fontSize: 18.0),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -613,7 +613,7 @@ Widget listclinics() => BlocProvider(
         builder: (context, state) {
           Mycubit.get(context).getdataapi();
           Mycubit.get(context).getdatatcache();
-          List? list=Mycubit.get(context).clinicsdata;
+          List? list = Mycubit.get(context).clinicsdata;
           return Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8),
             child: Container(
@@ -645,6 +645,48 @@ Widget listdiagno() => BlocProvider(
                         height: 10.0,
                       ),
                   itemCount: 10),
+            ),
+          );
+        },
+      ),
+    );
+Widget rowsetting(@required String? name,@required IconData icon,@required Color colors)=> Container(
+  width: double.infinity,
+  height: 35,
+  color: Color(0xffffffff),
+  child:   Row(
+    children: [
+      Icon(icon,color: colors),
+      Text(name!.tr,style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold),)
+    ],
+  ),
+);
+Widget settings() => BlocProvider(
+      create: (BuildContext Context) => Mycubit(),
+      child: BlocConsumer<Mycubit, tecsstates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                Text('welcome'.tr,style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold),),
+                SizedBox(height: 5,),
+                InkWell(
+                  child: rowsetting('lang',Icons.language,Color(0xff2a6bdb)),
+                  onTap: (){},
+                ),
+                SizedBox(height: 5,),
+                InkWell(
+                  child: rowsetting('emailus',Icons.email,Color(0xff2a6bdb)),
+                  onTap: (){},
+                ),
+                SizedBox(height: 5,),
+                InkWell(
+                  child: rowsetting('callus',Icons.call,Color(0xff2a6bdb)),
+                  onTap: (){},
+                ),
+
+              ],
             ),
           );
         },

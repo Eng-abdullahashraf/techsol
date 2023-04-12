@@ -45,8 +45,15 @@ class homescreen extends StatelessWidget {
                         if(index==1){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>loginscreen()));
                       }
+                        else if(index==2){
+                          Mycubit.get(context).changescreen(1);
+                        }
+                        else if(index==0){
+                          Mycubit.get(context).changescreen(0);
+
+                        }
                         else{
-                          print('object');
+                          print('error');
                         }
                       },
                       tabs: const[
@@ -60,7 +67,7 @@ class homescreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                body: homescreenf(),
+                body: Mycubit.get(context).homescreens[Mycubit.get(context).screennum!],
 
               ),
             );

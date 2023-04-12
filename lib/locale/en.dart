@@ -2,7 +2,7 @@
 const Map<String, String> en={
   'login':'Login',
   'booking':'book now',
-  'welcome':'Welcome Dear',
+  'welcome':'Welcome IN TECS',
   'fruitful':'have a fruitful day',
   'ple':'please fill up the data below',
   'ema':'Email address',
@@ -37,7 +37,11 @@ const Map<String, String> en={
   'medlab':'Medical Lab',
   'book':'Book Test & Checkups',
   'price':'Disclosure price :',
-  'teb':'ارشادات طبية',
+  'teb':'Medical instructions',
+  'lang':'Language',
+  'emailus':'Email US',
+  'callus':'Conatact US'
+
 
 
 };

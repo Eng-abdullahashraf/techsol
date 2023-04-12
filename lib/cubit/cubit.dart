@@ -37,6 +37,16 @@ class Mycubit extends Cubit<tecsstates> {
     emit(tecsgetdatafromapi());
   }
 
+  int? screennum=0;
+  List<Widget> homescreens=[
+    homescreenf(),
+    settings()
+  ];
+  void changescreen( int a){
+    screennum=a;
+    emit(tecschangestate());
+  }
+
   List? clinicsdata;
   void getdatatcache(){
     String? map=cache.getdata('zeko');
