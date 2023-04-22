@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:techso/component.dart';

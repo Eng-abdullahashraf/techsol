@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:techso/network/cache.dart';
 import 'package:techso/screens/Seconedscreen.dart';
 
 import 'cubit/cubit.dart';

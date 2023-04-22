@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:techso/component.dart';
 import 'package:techso/cubit/cubit.dart';
 import 'package:techso/cubit/states.dart';
-import 'package:techso/screens/home.dart';
 
 class seconedscreen extends StatelessWidget {
 
