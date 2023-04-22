@@ -40,5 +40,7 @@ const Map<String, String> ar={
   'teb':'ارشادات طبية',
   'lang':'اللغة',
   'emailus':'ارسل لنا',
-  'callus':'اتصل بنا'
+  'callus':'اتصل بنا',
+  'applang':'لفة التطبيق',
+
 };

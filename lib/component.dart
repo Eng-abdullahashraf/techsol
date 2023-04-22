@@ -650,42 +650,141 @@ Widget listdiagno() => BlocProvider(
         },
       ),
     );
-Widget rowsetting(@required String? name,@required IconData icon,@required Color colors)=> Container(
-  width: double.infinity,
-  height: 35,
-  color: Color(0xffffffff),
-  child:   Row(
-    children: [
-      Icon(icon,color: colors),
-      Text(name!.tr,style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold),)
-    ],
-  ),
-);
+Widget rowsetting(@required String? name, @required IconData icon,
+        @required Color colors) =>
+    Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Container(
+        width: double.infinity,
+        height: 45,
+        decoration: BoxDecoration(
+            color: Color(0xffffffff),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 5.0, color: Color(0xfffffff), offset: Offset.zero)
+            ]),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 4, right: 4),
+              child: Icon(icon, color: colors),
+            ),
+            Expanded(
+              child: Text(
+                name!.tr,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios),
+          ],
+        ),
+      ),
+    );
+
 Widget settings() => BlocProvider(
       create: (BuildContext Context) => Mycubit(),
       child: BlocConsumer<Mycubit, tecsstates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return SingleChildScrollView(
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'welcome'.tr,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              InkWell(
+                child: rowsetting('lang', Icons.language, Color(0xff2a6bdb)),
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return radiocontainer();
+                      });
+                },
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                child: rowsetting('emailus', Icons.email, Color(0xff2a6bdb)),
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                child: rowsetting('callus', Icons.call, Color(0xff2a6bdb)),
+                onTap: () {},
+              ),
+              Expanded(
+                  child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Text('data'),
+              )),
+            ],
+          );
+        },
+      ),
+    );
+
+Widget radiocontainer() => BlocProvider(
+      create: (BuildContext context) => Mycubit(),
+      child: BlocConsumer<Mycubit, tecsstates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            height: 150,
             child: Column(
               children: [
-                Text('welcome'.tr,style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold),),
-                SizedBox(height: 5,),
-                InkWell(
-                  child: rowsetting('lang',Icons.language,Color(0xff2a6bdb)),
-                  onTap: (){},
+                Text(
+                  'applang'.tr,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
                 ),
-                SizedBox(height: 5,),
-                InkWell(
-                  child: rowsetting('emailus',Icons.email,Color(0xff2a6bdb)),
-                  onTap: (){},
+                Row(
+                  children: [
+                    Radio(
+                        value: 1,
+                        groupValue: Mycubit.get(context).valueeradio,
+                        onChanged: (value) {
+                           Mycubit.get(context).changeradio(value);
+                        }),
+                    Expanded(
+                        child: Text(
+                      'English',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+                  ],
                 ),
-                SizedBox(height: 5,),
-                InkWell(
-                  child: rowsetting('callus',Icons.call,Color(0xff2a6bdb)),
-                  onTap: (){},
-                ),
-
+                Row(
+                  children: [
+                    Radio(
+                        value: 2,
+                        groupValue: Mycubit.get(context).valueeradio,
+                        onChanged: (value) {
+                          Mycubit.get(context).changeradio(value);
+                        }),
+                    Expanded(
+                        child: Text(
+                      'اللغة العربية',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+                  ],
+                )
               ],
             ),
           );

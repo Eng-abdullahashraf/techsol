@@ -19,7 +19,6 @@ class homescreen extends StatelessWidget {
       child: BlocConsumer<Mycubit,tecsstates>(
           listener: (context, state) {},
           builder: (context , state){
-            Mycubit.get(context).getdataapi();
             return SafeArea(
               child: Scaffold(
                 appBar: AppBar(

@@ -21,6 +21,7 @@ class Mycubit extends Cubit<tecsstates> {
     listdiagno(),
   ];
 
+
   void changesecon(int? a) {
     x = a;
     emit(tecschangestate());
@@ -57,5 +58,12 @@ class Mycubit extends Cubit<tecsstates> {
   void cacher(){
     cache.putdata( 'datase' , 'shepo');
     emit(tecschangestate());
+  }
+
+  int? valueeradio=1;
+  void changeradio(value){
+    valueeradio=value;
+    emit(tecschangestate());
+
   }
 }

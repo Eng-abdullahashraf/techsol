@@ -40,7 +40,8 @@ const Map<String, String> en={
   'teb':'Medical instructions',
   'lang':'Language',
   'emailus':'Email US',
-  'callus':'Conatact US'
+  'callus':'Conatact US',
+  'applang':'App language',
 
 
 
