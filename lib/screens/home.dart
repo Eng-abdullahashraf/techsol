@@ -20,53 +20,34 @@ class homescreen extends StatelessWidget {
           builder: (context , state){
             return SafeArea(
               child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Color(0xff2a6bdb),
-                  title: Text('TECS',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0)),
-                  actions: [
-
-                    IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-                  ],
-
-                ),
-                bottomNavigationBar: Container(
-                  color: Color(0xff2a6bdb),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 15.0),
-                    child: GNav(
-                      backgroundColor: Color(0xff2a6bdb),
-                      color: Color(0xffffffff),
-                      activeColor: Color(0xffffffff),
-                      tabBackgroundColor: Color(0xff8eb1ec),
-                      padding: EdgeInsets.all(16.0),
-                      onTabChange: (index){
-                        if(index==1){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>loginscreen()));
-                      }
-                        else if(index==2){
-                          Mycubit.get(context).changescreen(1);
-                        }
-                        else if(index==0){
+                body:
+                Mycubit.get(context).homescreens[Mycubit.get(context).screennum!],
+                drawer:  Drawer(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: <Widget>[
+                      DrawerHeader(
+                        child: Text('TECS',style: TextStyle(fontWeight: FontWeight.bold)),
+                        decoration: BoxDecoration(color: Color(0xff2a6bdb)),
+                      ),
+                      ListTile(title: Text('Home',style: TextStyle(fontWeight: FontWeight.bold)),
+                        leading: Icon(Icons.home),
+                        onTap: (){
                           Mycubit.get(context).changescreen(0);
-
-                        }
-                        else{
-                          print('error');
-                        }
-                      },
-                      tabs: const[
-                        GButton(icon: Icons.home,
-                          text:  'Home',),
-                        GButton(icon: Icons.login,
-                          text: 'Login',),
-                        GButton(icon: Icons.settings,
-                          text: 'Settings',),
-                      ],
-                    ),
+                        },),
+                      ListTile(title: Text('Settings',style: TextStyle(fontWeight: FontWeight.bold)),
+                        leading: Icon(Icons.settings),
+                        onTap: (){
+                        Mycubit.get(context).changescreen(1);
+                        },),
+                      ListTile(title: Text('Login',style: TextStyle(fontWeight: FontWeight.bold),),
+                        leading: Icon(Icons.login),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>loginscreen()));
+                        },)
+                    ],
                   ),
                 ),
-                body: Mycubit.get(context).homescreens[Mycubit.get(context).screennum!],
-
               ),
             );
           }),

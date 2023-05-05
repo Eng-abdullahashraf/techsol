@@ -42,5 +42,5 @@ const Map<String, String> ar={
   'emailus':'ارسل لنا',
   'callus':'اتصل بنا',
   'applang':'لفة التطبيق',
-
+  'dak':'الدقهلية'
 };

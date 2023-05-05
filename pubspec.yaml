@@ -41,6 +41,9 @@ dependencies:
   sqflite:
   google_nav_bar: ^5.0.6
   shared_preferences:
+  url_launcher:
+  carousel_slider:
+
 
 
 
@@ -81,6 +84,9 @@ flutter:
     - images/statistic.png
     - images/doctors.png
     - images/diagno.png
+    - images/ima1.jpg
+    - images/ima2.jpg
+    - images/ima3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

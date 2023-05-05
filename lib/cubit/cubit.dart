@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:techso/component.dart';
 import 'package:techso/cubit/states.dart';
 import 'package:techso/network/cache.dart';
@@ -14,6 +15,9 @@ class Mycubit extends Cubit<tecsstates> {
 
   static Mycubit get(context) => BlocProvider.of(context);
 
+  List<String>? gov=[
+    'dak'.tr
+  ];
   int? x;
   List<Widget> secon = [
     listclinics(),
@@ -21,9 +25,27 @@ class Mycubit extends Cubit<tecsstates> {
   ];
 
 
+  List<Image> imag=[
+    Image(image: AssetImage('images/ima1.jpg'),width: double.infinity,fit: BoxFit.cover,),
+    Image(image: AssetImage('images/ima2.jpg'),width: double.infinity,fit: BoxFit.cover,),
+    Image(image: AssetImage('images/ima3.jpg'),width: double.infinity,fit: BoxFit.cover,),
+
+  ];
   void changesecon(int? a) {
     x = a;
     emit(tecschangestate());
+  }
+
+
+
+
+  void postdata(String? name, String? mail, String? ph, String? mes) {
+    diohelp.postdata(URL: 'api/v1/send-contact-us', data: {
+      'name': name,
+      'email': mail,
+      'phone': ph,
+      'message': mes
+    }).then((value) => print(value.data));
   }
 
   void getdataapi() {

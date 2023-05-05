@@ -42,6 +42,7 @@ const Map<String, String> en={
   'emailus':'Email US',
   'callus':'Conatact US',
   'applang':'App language',
+  'dak':'Dakhalia'
 
 
 

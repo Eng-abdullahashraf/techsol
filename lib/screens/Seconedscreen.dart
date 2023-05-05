@@ -20,6 +20,9 @@ class seconedscreen extends StatelessWidget {
               child: Scaffold(
             appBar: AppBar(
               leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back)),
+              actions: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+              ],
             ),
 
             body: Mycubit.get(context).secon[Mycubit.get(context).x!],

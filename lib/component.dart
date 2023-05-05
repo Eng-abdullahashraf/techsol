@@ -1,9 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:techso/screens/Seconedscreen.dart';
-
+import 'package:techso/screens/contact.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
@@ -209,7 +211,7 @@ Widget consult() => Container(
         ],
       ),
       width: 200,
-      height: 170,
+      height: 150,
       child: Column(children: [
         Image(image: AssetImage('images/diagno.png'), width: 70, height: 70),
         Text(
@@ -251,35 +253,56 @@ Widget listconsult() => BlocProvider(
       ),
     );
 
-Widget homescreenf() => SingleChildScrollView(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: doctorcon(),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: diagnostics(),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Container(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'teb'.tr,
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
-                child: listconsult(),
-              ),
-            ],
-          )),
-        ),
-      ]),
-    );
+Widget homescreenf() => BlocProvider(
+    create: (BuildContext Context) => Mycubit(),
+    child: BlocConsumer<Mycubit, tecsstates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            AppBar(
+              backgroundColor: Color(0xff2a6bdb),
+              title: Text('TECS',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: doctorcon(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: diagnostics(),
+            ),
+            Container(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'teb'.tr,
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+                CarouselSlider(
+                    items: Mycubit.get(context).imag,
+                    options: CarouselOptions(
+                        height: 200,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(seconds: 1),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        scrollDirection: Axis.horizontal,
+                        viewportFraction: 1.0)),
+              ],
+            )),
+          ]),
+        );
+      },
+    ));
 
 Widget clinics(data) => Padding(
       padding: const EdgeInsets.only(right: 8, left: 8),
@@ -616,13 +639,68 @@ Widget listclinics() => BlocProvider(
           return Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8),
             child: Container(
-              child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => clinics(list![index]),
-                  separatorBuilder: (context, index) => SizedBox(
-                        height: 10.0,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: DropdownButton(
+                              value: 'الدقهلية',
+                              items: Mycubit.get(context)
+                                  .gov!
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? newvalue) {}),
+                        ),
                       ),
-                  itemCount: list!.length),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: DropdownButton(
+                              items: Mycubit.get(context)
+                                  .gov!
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? newvalue) {}),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: DropdownButton(
+                              value: 'الدقهلية',
+                              items: Mycubit.get(context)
+                                  .gov!
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? newvalue) {}),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Expanded(
+                    child: ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) => clinics(list![index]),
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 10.0,
+                            ),
+                        itemCount: list!.length),
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -686,9 +764,19 @@ Widget settings() => BlocProvider(
       child: BlocConsumer<Mycubit, tecsstates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var x = '01024797768';
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              AppBar(
+                backgroundColor: Color(0xff2a6bdb),
+                title: Text('TECS',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                actions: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                ],
+              ),
               Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -712,19 +800,46 @@ Widget settings() => BlocProvider(
               ),
               InkWell(
                 child: rowsetting('emailus', Icons.email, Color(0xff2a6bdb)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => contactus(),
+                      ));
+                },
               ),
               SizedBox(
                 height: 5,
               ),
               InkWell(
                 child: rowsetting('callus', Icons.call, Color(0xff2a6bdb)),
-                onTap: () {},
+                onTap: () {
+                  launch('tel:$x');
+                },
               ),
               Expanded(
                   child: Container(
                 alignment: Alignment.bottomCenter,
-                child: Text('data'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              launch('https://www.facebook.com/techsollution',
+                                  universalLinksOnly: true);
+                            },
+                            icon: Icon(Icons.facebook)),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.linked_camera_outlined)),
+                      ],
+                    ),
+                    Text('TECS'),
+                  ],
+                ),
               )),
             ],
           );
@@ -756,7 +871,7 @@ Widget radiocontainer() => BlocProvider(
                         value: 1,
                         groupValue: Mycubit.get(context).valueeradio,
                         onChanged: (value) {
-                           Mycubit.get(context).changeradio(value);
+                          Mycubit.get(context).changeradio(value);
                         }),
                     Expanded(
                         child: Text(
